@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillConnect - Labor Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .search-section {
+            background: white;
+            margin: -2rem auto 0;
+            max-width: 800px;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .service-tab {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .service-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .service-tab:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .filter-group select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .worker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .worker-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .worker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .worker-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .worker-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 1rem;
+            overflow: hidden;
+        }
+
+        .worker-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .worker-info h3 {
+            margin-bottom: 0.25rem;
+            color: #333;
+        }
+
+        .worker-category {
+            color: #667eea;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        .rating-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .price {
+            background: #f8f9fa;
+            padding: 0.75rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .price-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .price-unit {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .worker-skills {
+            margin: 1rem 0;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+            color: #555;
+        }
+
+        .contact-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .chat-widget:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-popup {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .chat-header {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            padding: 0.75rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.bot {
+            background: #f0f0f0;
+            align-self: flex-start;
+        }
+
+        .message.user {
+            background: #667eea;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-input button {
+            margin-left: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .search-section {
+                margin: -1rem 1rem 0;
+            }
+
+            .worker-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .service-tabs {
+                justify-content: center;
+            }
+
+            .chat-popup {
+                width: 90%;
+                right: 5%;
+            }
+        }
+
+        #modal-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.worker-portfolio {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+}
+.worker-portfolio img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">SkillConnect</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Find Skilled Professionals</h1>
+            <p>Connect with trusted electricians, painters, carpenters, and plumbers in your area</p>
+        </div>
+    </section>
+    
+    <section class="search-section" id="services">
+        <div class="service-tabs">
+            <div class="service-tab active" data-category="all">All Services</div>
+            <div class="service-tab" data-category="electrician">🔌 Electrician</div>
+            <div class="service-tab" data-category="painter">🎨 Painter</div>
+            <div class="service-tab" data-category="carpenter">🔨 Carpenter</div>
+            <div class="service-tab" data-category="plumber">🚰 Plumber</div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label for="rating-filter">Minimum Rating</label>
+                <select id="rating-filter">
+                    <option value="0">All Ratings</option>
+                    <option value="4">4+ Stars</option>
+                    <option value="4.5">4.5+ Stars</option>
+                    <option value="4.8">4.8+ Stars</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="price-filter">Price Range</label>
+                <select id="price-filter">
+                    <option value="all">All Prices</option>
+                    <option value="low">Under $50/hr</option>
+                    <option value="medium">$50-100/hr</option>
+                    <option value="high">$100+ /hr</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="location-filter">Location</label>
+                <select id="location-filter">
+                    <option value="all">All Areas</option>
+                    <option value="downtown">Downtown</option>
+                    <option value="suburbs">Suburbs</option>
+                    <option value="north">North Side</option>
+                    <option value="south">South Side</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <section class="worker-grid" id="workers-container">
+        <!-- Workers will be populated by JavaScript -->
+    </section>
+
+</section> <!-- Hero section end -->
+<section id="about"> ... </section> <!-- About section start -->
+
+    <section id="about" style="padding: 4rem 2rem; background-color: #fff; text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">About SkillConnect</h2>
+            <p style="font-size: 1.1rem; color: #555;">
+                SkillConnect is a modern labor marketplace that bridges the gap between skilled workers and those in need of their services. 
+                Whether you're looking for an electrician, plumber, carpenter, or painter, our platform helps you find trusted professionals in your area quickly and easily.
+            </p>
+        </div>
+    </section>
+
+</section> <!-- About section end -->
+<section id="contact">...</section> <!-- Contact section -->
+
+
+<section id="contact" style="padding: 4rem 2rem; background-color: #f8f9fa; text-align: center;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Contact Us</h2>
+        <p style="font-size: 1.1rem; color: #555; margin-bottom: 2rem;">
+            Have questions or need help? Reach out to us!
+        </p>
+
+        <div style="text-align: left; margin-bottom: 2rem;">
+            <p><strong>📞 Phone:</strong> 999999999</p>
+            <p><strong>📧 Email:</strong> <a href="mailto:yourname@example.com">yourname@example.com</a></p>
+            <p><strong>📸 Instagram:</strong> <a href="https://instagram.com/yourprofile" target="_blank">@yourprofile</a></p>
+            <p><strong>📘 Facebook:</strong> <a href="https://facebook.com/yourpage" target="_blank">facebook.com/yourpage</a></p>
+        </div>
+
+        <form style="display: flex; flex-direction: column; gap: 1rem;">
+            <input type="text" placeholder="Your Name" required style="padding: 0.75rem; border-radius: 5px; border: 1px solid #ccc;">
+            <input type="email" placeholder="Your Email" required style="padding: 0.75rem; border-radius: 5px; border: 1px solid #ccc;">
+            <textarea placeholder="Your Message" rows="5" required style="padding: 0.75rem; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+            <button type="submit" style="padding: 0.75rem; border: none; border-radius: 5px; background-color: #667eea; color: white; font-size: 1rem; cursor: pointer;">
+                Send Message
+            </button>
+        </form>
+    </div>
+</section>
+
+
+
+
+
+    <!-- Chat Widget -->
+    <div class="chat-widget" id="chat-widget">💬</div>
+
+    <!-- Chat Popup -->
+    <div class="chat-popup" id="chat-popup">
+        <div class="chat-header">
+            <span>Support Chat</span>
+            <span class="close" id="close-chat">&times;</span>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Type your message...">
+            <button id="send-message">Send</button>
+        </div>
+    </div>
+
+    <!-- Worker Detail Modal -->
+    <div id="worker-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // Worker data
+        const workers = [
+            {
+                id: 1,
+                name: "Mukesh Sharma",
+                category: "electrician",
+                rating: 4.8,
+                reviews: 127,
+                price: 75,
+                location: "downtown",
+                skills: ["Wiring", "Panel Upgrades", "Smart Home"],
+                experience: "8 years",
+                phone: "+1 (555) 123-4567",
+                email: "john.smith@email.com",
+                photo: "images/danny.jpg",
+                portfolio: ["portfolio/mukeshwork1.jpg", "portfolio/mukeshwork2.jpg"]
+            },
+            {
+                id: 2,
+                name: "Krishna Kumar",
+                category: "painter",
+                rating: 4.9,
+                reviews: 89,
+                price: 45,
+                location: "suburbs",
+                skills: ["Interior Painting", "Exterior Painting", "Color Consultation"],
+                experience: "6 years",
+                phone: "+1 (555) 234-5678",
+                email: "maria.rodriguez@email.com",
+                photo: "images/maria.jpg",
+                portfolio: ["portfolio/krishnapainter1.jpg", "portfolio/krishnapainter2.jpg"]
+            },
+            {
+                id: 3,
+                name: "Shreyas Varma",
+                category: "carpenter",
+                rating: 4.7,
+                reviews: 156,
+                price: 65,
+                location: "north",
+                skills: ["Custom Furniture", "Kitchen Cabinets", "Flooring"],
+                experience: "12 years",
+                phone: "+1 (555) 345-6789",
+                email: "david.wilson@email.com",
+                photo: "images/david.jpg",
+                portfolio: ["portfolio/shreyascarpenyter1.jpg", "portfolio/shreyascarpenter2.jpg"]
+            },
+            {
+                id: 4,
+                name: "Sammer Shami",
+                category: "plumber",
+                rating: 4.6,
+                reviews: 203,
+                price: 85,
+                location: "south",
+                skills: ["Pipe Repair", "Drain Cleaning", "Water Heater Install"],
+                experience: "10 years",
+                phone: "+1 (555) 456-7890",
+                email: "sarah.johnson@email.com",
+                photo: "images/sarah.jpg",
+                portfolio: ["portfolio/sarahplumber1.jpg", "portfolio/sarahplumber2.jpg"]
+            },
+            {
+                id: 5,
+                name: "Shreya Goswami",
+                category: "electrician",
+                rating: 4.5,
+                reviews: 91,
+                price: 60,
+                location: "suburbs",
+                skills: ["LED Installation", "Circuit Repair", "Ceiling Fans"],
+                experience: "5 years",
+                phone: "+1 (555) 567-8901",
+                email: "mike.chen@email.com",
+                photo: "images/mike.jpg",
+                portfolio: ["portfolio/shreyaelectrain1.jpg", "portfolio/shreyaelectrian2.jpg"]
+            },
+            {
+                id: 6,
+                name: "Arjun Naik",
+                category: "painter",
+                rating: 4.8,
+                reviews: 134,
+                price: 55,
+                location: "downtown",
+                skills: ["Faux Finishes", "Wallpaper", "Deck Staining"],
+                experience: "9 years",
+                phone: "+1 (555) 678-9012",
+                email: "lisa.thompson@email.com",
+                photo: "images/lisa.jpg",
+                portfolio: ["portfolio/arjunpainter1.jpg", "portfolio/arjunpainter2.jpg"]
+            }
+        ];
+
+        let currentCategory = 'all';
+        let currentRatingFilter = '0';
+        let currentPriceFilter = 'all';
+        let currentLocationFilter = 'all';
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('');
+        }
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            let stars = '★'.repeat(fullStars);
+            if (hasHalfStar) stars += '☆';
+            return stars;
+        }
+
+        function getPriceCategory(price) {
+            if (price < 50) return 'low';
+            if (price <= 100) return 'medium';
+            return 'high';
+        }
+
+        function filterWorkers() {
+            return workers.filter(worker => {
+                const categoryMatch = currentCategory === 'all' || worker.category === currentCategory;
+                const ratingMatch = worker.rating >= parseFloat(currentRatingFilter);
+                const priceMatch = currentPriceFilter === 'all' || getPriceCategory(worker.price) === currentPriceFilter;
+                const locationMatch = currentLocationFilter === 'all' || worker.location === currentLocationFilter;
+                
+                return categoryMatch && ratingMatch && priceMatch && locationMatch;
+            });
+        }
+
+        function renderWorkers(workersToRender = null) {
+            const container = document.getElementById('workers-container');
+            const workersData = workersToRender || filterWorkers();
+            
+            container.innerHTML = workersData.map(worker => `
+                <div class="worker-card" data-worker-id="${worker.id}">
+                    <div class="worker-header">
+                        <div class="worker-avatar">
+                            ${worker.photo ? 
+                                `<img src="${worker.photo}" alt="${worker.name}" />` : 
+                                getInitials(worker.name)
+                            }
+                        </div>
+                        <div class="worker-info">
+                            <h3>${worker.name}</h3>
+                            <div class="worker-category">${worker.category}</div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <span class="stars">${generateStars(worker.rating)}</span>
+                        <span class="rating-text">${worker.rating} (${worker.reviews} reviews)</span>
+                    </div>
+                    <div class="price">
+                        <div class="price-amount">${worker.price}</div>
+                        <div class="price-unit">per hour</div>
+                    </div>
+                    <div class="worker-skills">
+                        ${worker.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                    </div>
+                    <button class="contact-btn" onclick="openWorkerModal(${worker.id})">View Profile & Chat</button>
+              
+              <div class="worker-portfolio">
+    <h3>Previous Work</h3>
+    ${worker.portfolio?.map(img => `<img src="${img}" alt="Work sample" style="width: 100px; height: auto; margin: 5px;" />`).join('') || 'No images uploaded'}
+</div>
+
+              
+                    </div>
+            `).join('');
+        }
+
+        function openWorkerModal(workerId) {
+            const worker = workers.find(w => w.id === workerId);
+            const modal = document.getElementById('worker-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalContent.innerHTML = `
+                <div class="profile-section">
+                    <div class="profile-avatar">
+                        ${worker.photo ? 
+                            `<img src="${worker.photo}" alt="${worker.name}" />` : 
+                            getInitials(worker.name)
+                        }
+                    </div>
+                    <h2>${worker.name}</h2>
+                    <p class="worker-category">${worker.category}</p>
+                    <div class="rating">
+                        <span class="stars">${generateStars(worker.rating)}</span>
+                        <span class="rating-text">${worker.rating} (${worker.reviews} reviews)</span>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><strong>Phone:</strong> ${worker.phone}</p>
+                    <p><strong>Email:</strong> ${worker.email}</p>
+                    <p><strong>Rate:</strong> ${worker.price}/hour</p>
+                    <p><strong>Experience:</strong> ${worker.experience}</p>
+                    <p><strong>Location:</strong> ${worker.location}</p>
+                </div>
+                
+                <div class="worker-skills">
+                    <h3>Skills & Specialties</h3>
+                    ${worker.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                </div>
+                
+                <div class="worker-portfolio">
+                    <h3>Previous Work</h3>
+                       ${worker.portfolio && worker.portfolio.length ? 
+                        worker.portfolio.map(img => `<img src="${img}" class="portfolio-img" alt="Work sample">`).join('') 
+                       : '<p>No portfolio images available.</p>'
+                        }
+                </div>
+                <button class="contact-btn" onclick="startChat('${worker.name}')">Start Chat with ${worker.name}</button>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        let currentChatWorker = null;
+        let chatSessions = {}; // Store chat history for each worker
+
+        function startChat(workerName) {
+            const worker = workers.find(w => w.name === workerName);
+            const modal = document.getElementById('worker-modal');
+            const chatPopup = document.getElementById('chat-popup');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatHeader = document.querySelector('.chat-header span:first-child');
+            
+            currentChatWorker = worker;
+            modal.style.display = 'none';
+            chatPopup.style.display = 'flex';
+            
+            // Update chat header with worker info
+            chatHeader.innerHTML = `
+                Chat with ${workerName} (${worker.category})
+            `;
+            
+            // Load existing chat history or start new conversation
+            if (chatSessions[worker.id]) {
+                chatMessages.innerHTML = chatSessions[worker.id];
+            } else {
+                const welcomeMessage = getWorkerWelcomeMessage(worker);
+                chatMessages.innerHTML = `
+                    <div class="message bot">
+                        ${welcomeMessage}
+                    </div>
+                `;
+                chatSessions[worker.id] = chatMessages.innerHTML;
+            }
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getWorkerWelcomeMessage(worker) {
+            const welcomeMessages = {
+                electrician: `Hi! I'm ${worker.name}, your electrician with ${worker.experience} of experience. I specialize in ${worker.skills.join(', ')}. How can I help with your electrical needs today?`,
+                painter: `Hello! I'm ${worker.name}, a professional painter with ${worker.experience} of experience. I excel in ${worker.skills.join(', ')}. What painting project can I help you with?`,
+                carpenter: `Hey there! I'm ${worker.name}, a skilled carpenter with ${worker.experience} of experience. My specialties include ${worker.skills.join(', ')}. What woodworking project are you planning?`,
+                plumber: `Hi! I'm ${worker.name}, your local plumber with ${worker.experience} of experience. I handle ${worker.skills.join(', ')} and more. What plumbing issue can I solve for you?`
+            };
+            
+            return welcomeMessages[worker.category] || `Hello! I'm ${worker.name}. How can I assist you today?`;
+        }
+
+        function getWorkerResponse(worker, userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            // Common responses for all workers
+            if (message.includes('price') || message.includes('cost') || message.includes('rate')) {
+                return `My rate is ${worker.price} per hour. The final cost depends on the scope of work. Would you like me to provide a detailed estimate for your project?`;
+            }
+            
+            if (message.includes('when') || message.includes('schedule') || message.includes('available')) {
+                return `I'm currently taking new projects. My typical turnaround depends on the job size. For urgent work, I can often accommodate same-day or next-day service. What's your preferred timeline?`;
+            }
+            
+            if (message.includes('experience') || message.includes('qualification')) {
+                return `I have ${worker.experience} of professional experience with a ${worker.rating}-star rating from ${worker.reviews} satisfied customers. I'm fully licensed and insured.`;
+            }
+            
+            if (message.includes('location') || message.includes('area') || message.includes('travel')) {
+                return `I primarily serve the ${worker.location} area, but I'm willing to travel for the right project. Where is your job location?`;
+            }
+            
+            // Category-specific responses
+            switch (worker.category) {
+                case 'electrician':
+                    if (message.includes('outlet') || message.includes('switch')) {
+                        return `I can definitely help with outlet and switch installations or repairs. This typically takes 1-2 hours depending on complexity. Would you like me to come take a look?`;
+                    }
+                    if (message.includes('wiring') || message.includes('rewire')) {
+                        return `Wiring projects are one of my specialties. I can handle everything from simple repairs to full home rewiring. I'll need to assess the current setup first. Can you describe what you need?`;
+                    }
+                    if (message.includes('panel') || message.includes('breaker')) {
+                        return `Panel upgrades and breaker work are crucial for home safety. I can evaluate your current panel and recommend the best solution. When would be a good time for an inspection?`;
+                    }
+                    break;
+                    
+                case 'painter':
+                    if (message.includes('interior') || message.includes('inside')) {
+                        return `Interior painting is one of my favorite projects! I use high-quality paints and ensure clean, professional results. What rooms are you looking to paint?`;
+                    }
+                    if (message.includes('exterior') || message.includes('outside')) {
+                        return `Exterior painting requires special attention to weather resistance and preparation. I use premium exterior paints that last for years. What's the size of your home?`;
+                    }
+                    if (message.includes('color') || message.includes('colors')) {
+                        return `I offer color consultation as part of my service! I can help you choose colors that complement your space and personal style. Would you like some suggestions?`;
+                    }
+                    break;
+                    
+                case 'carpenter':
+                    if (message.includes('furniture') || message.includes('custom')) {
+                        return `Custom furniture is my passion! I can create pieces tailored exactly to your space and needs. Do you have any design ideas or specific requirements in mind?`;
+                    }
+                    if (message.includes('kitchen') || message.includes('cabinet')) {
+                        return `Kitchen cabinets are a specialty of mine. Whether it's new installation, refacing, or custom builds, I can transform your kitchen. What's your vision?`;
+                    }
+                    if (message.includes('floor') || message.includes('flooring')) {
+                        return `I install all types of flooring - hardwood, laminate, vinyl, and tile. Each has its benefits depending on your needs and budget. What area needs new flooring?`;
+                    }
+                    break;
+                    
+                case 'plumber':
+                    if (message.includes('leak') || message.includes('drip')) {
+                        return `Leaks need immediate attention to prevent damage. I can quickly diagnose and fix most leaks, from simple faucet drips to major pipe issues. Where is the leak located?`;
+                    }
+                    if (message.includes('drain') || message.includes('clog')) {
+                        return `Drain clogs are common but fixable! I use professional equipment to clear even the toughest blockages without damaging your pipes. Which drain is giving you trouble?`;
+                    }
+                    if (message.includes('water heater') || message.includes('hot water')) {
+                        return `Water heater issues can be tricky. Whether it's repair or replacement, I can get your hot water flowing again. What problems are you experiencing?`;
+                    }
+                    break;
+            }
+            
+            // Default responses
+            const defaultResponses = [
+                `Thanks for reaching out! I'd be happy to help with your ${worker.category} needs. Can you tell me more about your project?`,
+                `That sounds like something I can definitely help with. Could you provide more details about what you're looking to accomplish?`,
+                `I have experience with similar projects. Would you like to schedule a consultation so I can give you a proper assessment?`,
+                `Great question! I'd love to discuss this further. What's the best way for us to move forward with your project?`
+            ];
+            
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            renderWorkers();
+            
+            // Service tabs
+            document.querySelectorAll('.service-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.service-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.dataset.category;
+                    renderWorkers();
+                });
+            });
+            
+            // Filters
+            document.getElementById('rating-filter').addEventListener('change', function() {
+                currentRatingFilter = this.value;
+                renderWorkers();
+            });
+            
+            document.getElementById('price-filter').addEventListener('change', function() {
+                currentPriceFilter = this.value;
+                renderWorkers();
+            });
+            
+            document.getElementById('location-filter').addEventListener('change', function() {
+                currentLocationFilter = this.value;
+                renderWorkers();
+            });
+            
+            // Chat widget
+            document.getElementById('chat-widget').addEventListener('click', function() {
+                const chatPopup = document.getElementById('chat-popup');
+                const chatMessages = document.getElementById('chat-messages');
+                
+                if (chatPopup.style.display === 'flex') {
+                    chatPopup.style.display = 'none';
+                } else {
+                    chatPopup.style.display = 'flex';
+                    if (chatMessages.children.length === 0) {
+                        chatMessages.innerHTML = `
+                            <div class="message bot">
+                                Welcome to SkillConnect! I'm here to help you find the right professional for your needs. What kind of service are you looking for?
+                            </div>
+                        `;
+                    }
+                }
+            });
+            
+            // Close chat
+            document.getElementById('close-chat').addEventListener('click', function() {
+                document.getElementById('chat-popup').style.display = 'none';
+                // Reset to general support when closing chat
+                currentChatWorker = null;
+                document.querySelector('.chat-header span:first-child').textContent = 'Support Chat';
+            });
+            
+            // Send message function
+            function sendMessage() {
+                const input = document.getElementById('chat-input');
+                const message = input.value.trim();
+                
+                if (message) {
+                    const chatMessages = document.getElementById('chat-messages');
+                    
+                    // Add user message
+                    chatMessages.innerHTML += `<div class="message user">${message}</div>`;
+                    
+                    // Clear input
+                    input.value = '';
+                    
+                    // Generate appropriate response based on current chat context
+                    setTimeout(() => {
+                        let botResponse = '';
+                        
+                        if (currentChatWorker) {
+                            // Individual worker response
+                            botResponse = getWorkerResponse(currentChatWorker, message);
+                        } else {
+                            // General support responses
+                            if (message.toLowerCase().includes('electrician')) {
+                                botResponse = 'I can help you find a great electrician! We have experienced professionals like John Smith and Mike Chen available. Would you like to see their profiles?';
+                            } else if (message.toLowerCase().includes('painter')) {
+                                botResponse = 'Perfect! We have skilled painters like Maria Rodriguez and Lisa Thompson. They specialize in both interior and exterior painting. Shall I show you their details?';
+                            } else if (message.toLowerCase().includes('carpenter')) {
+                                botResponse = 'For carpentry work, I recommend David Wilson. He has 12 years of experience and specializes in custom furniture and kitchen cabinets. Would you like his contact information?';
+                            } else if (message.toLowerCase().includes('plumber')) {
+                                botResponse = 'For plumbing services, Sarah Johnson is highly rated with 4.6 stars. She handles everything from pipe repairs to water heater installations. Interested in connecting with her?';
+                            } else {
+                                botResponse = 'I understand you need help with a service. Could you please specify what type of work you need? We have electricians, painters, carpenters, and plumbers available.';
+                            }
+                        }
+                        
+                        chatMessages.innerHTML += `<div class="message bot">${botResponse}</div>`;
+                        
+                        // Save chat session if talking to specific worker
+                        if (currentChatWorker) {
+                            chatSessions[currentChatWorker.id] = chatMessages.innerHTML;
+                        }
+                        
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, Math.random() * 1000 + 500); // Random delay between 0.5-1.5 seconds
+                    
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+            
+            document.getElementById('send-message').addEventListener('click', sendMessage);
+            
+            document.getElementById('chat-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Modal close
+            document.querySelectorAll('.close').forEach(closeBtn => {
+                closeBtn.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    if (modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Click outside modal to close
+            window.addEventListener('click', function(e) {
+                const modal = document.getElementById('worker-modal');
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <!-- Worker Modal -->
+<div id="worker-modal" class="modal" style="display: none;">
+    <div id="modal-content" class="modal-content">
+        <!-- Modal content will be injected by JS -->
+    </div>
+</div>
+
+</body>
+</html>
