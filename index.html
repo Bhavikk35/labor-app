@@ -541,19 +541,19 @@
                 <label for="price-filter">Price Range</label>
                 <select id="price-filter">
                     <option value="all">All Prices</option>
-                    <option value="low">Under $50/hr</option>
-                    <option value="medium">$50-100/hr</option>
-                    <option value="high">$100+ /hr</option>
+                    <option value="low">Under RS.50/hr</option>
+                    <option value="medium">Rs.50-100/hr</option>
+                    <option value="high">RS.100+ /hr</option>
                 </select>
             </div>
             <div class="filter-group">
                 <label for="location-filter">Location</label>
                 <select id="location-filter">
                     <option value="all">All Areas</option>
-                    <option value="downtown">Downtown</option>
-                    <option value="suburbs">Suburbs</option>
-                    <option value="north">North Side</option>
-                    <option value="south">South Side</option>
+                    <option value="downtown">Mumbai</option>
+                    <option value="suburbs">Navi Mumbai</option>
+                    <option value="north">Thane</option>
+                    <option value="south">Pune</option>
                 </select>
             </div>
         </div>
@@ -1079,7 +1079,6 @@
                             chatSessions[currentChatWorker.id] = chatMessages.innerHTML;
                         }
                         
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
                     }, Math.random() * 1000 + 500); // Random delay between 0.5-1.5 seconds
                     
                     chatMessages.scrollTop = chatMessages.scrollHeight;
