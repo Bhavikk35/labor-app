@@ -239,11 +239,24 @@
             font-size: 0.9rem;
         }
 
+        .worker-specifications {
+            margin: 1rem 0;
+        }
         .worker-skills {
             margin: 1rem 0;
         }
 
         .skill-tag {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+            color: #555;
+        }
+
+        .skills-tag {
             display: inline-block;
             background: #e9ecef;
             padding: 0.25rem 0.5rem;
@@ -521,10 +534,14 @@
     <section class="search-section" id="services">
         <div class="service-tabs">
             <div class="service-tab active" data-category="all">All Services</div>
+            <div class="service-tab" id="emergency-tab">🚨 Emergency</div>
             <div class="service-tab" data-category="electrician">🔌 Electrician</div>
             <div class="service-tab" data-category="painter">🎨 Painter</div>
             <div class="service-tab" data-category="carpenter">🔨 Carpenter</div>
             <div class="service-tab" data-category="plumber">🚰 Plumber</div>
+            <div class="service-tab" id="multi-skill-tab">🛠️ Multi-Skilled</div>
+
+           
         </div>
 
         <div class="filters">
@@ -588,7 +605,7 @@
         </p>
 
         <div style="text-align: left; margin-bottom: 2rem;">
-            <p><strong>📞 Phone:</strong> 999999999</p>
+            <p><strong>📞 Phone:</strong> 7066679997/9076400787</p>
             <p><strong>📧 Email:</strong> <a href="mailto:yourname@example.com">skillconnect@example.com</a></p>
             <p><strong>📸 Instagram:</strong> <a href="https://instagram.com/yourprofile" target="_blank">@skillconnect</a></p>
             <p><strong>📘 Facebook:</strong> <a href="https://facebook.com/yourpage" target="_blank">facebook.com/skillconnect</a></p>
@@ -644,7 +661,8 @@
                 reviews: 127,
                 price: 75,
                 location: "downtown",
-                skills: ["Wiring", "Panel Upgrades", "Smart Home"],
+                specifications: ["Wiring", "Panel Upgrades", "Smart Home"],
+                skills: [],
                 experience: "8 years",
                 phone: "+1 (555) 123-4567",
                 email: "john.smith@email.com",
@@ -655,11 +673,13 @@
                 id: 2,
                 name: "Krishna Kumar",
                 category: "painter",
+                isEmergency: true,
                 rating: 4.9,
                 reviews: 89,
                 price: 45,
                 location: "suburbs",
-                skills: ["Interior Painting", "Exterior Painting", "Color Consultation"],
+                specifications: ["Interior Painting", "Exterior Painting", "Color Consultation"],
+                skills: ["Plumber", "Carpenter"],
                 experience: "6 years",
                 phone: "+1 (555) 234-5678",
                 email: "maria.rodriguez@email.com",
@@ -670,11 +690,13 @@
                 id: 3,
                 name: "Shreyas Varma",
                 category: "carpenter",
-                rating: 4.7,
+                isEmergency: true,
+                 rating: 4.7,
                 reviews: 156,
                 price: 65,
                 location: "north",
-                skills: ["Custom Furniture", "Kitchen Cabinets", "Flooring"],
+                specifications: ["Custom Furniture", "Kitchen Cabinets", "Flooring"],
+                skills: ["Painter"],
                 experience: "12 years",
                 phone: "+1 (555) 345-6789",
                 email: "david.wilson@email.com",
@@ -685,11 +707,13 @@
                 id: 4,
                 name: "Sammer Shami",
                 category: "plumber",
+                isEmergency: true,
                 rating: 4.6,
                 reviews: 203,
                 price: 85,
                 location: "south",
-                skills: ["Pipe Repair", "Drain Cleaning", "Water Heater Install"],
+                specifications: ["Pipe Repair", "Drain Cleaning", "Water Heater Install"],
+                skills: ["Electrician"],
                 experience: "10 years",
                 phone: "+1 (555) 456-7890",
                 email: "sarah.johnson@email.com",
@@ -700,11 +724,13 @@
                 id: 5,
                 name: "Shreya Goswami",
                 category: "electrician",
+                isEmergency: true,
                 rating: 4.5,
                 reviews: 91,
                 price: 60,
                 location: "suburbs",
-                skills: ["LED Installation", "Circuit Repair", "Ceiling Fans"],
+                specifications: ["plumbing","LED Installation", "Circuit Repair", "Ceiling Fans"],
+                skills: ["PLumber", "Painter"],
                 experience: "5 years",
                 phone: "+1 (555) 567-8901",
                 email: "mike.chen@email.com",
@@ -719,7 +745,8 @@
                 reviews: 134,
                 price: 55,
                 location: "downtown",
-                skills: ["Faux Finishes", "Wallpaper", "Deck Staining"],
+                specifications: ["Faux Finishes", "Wallpaper", "Deck Staining"],
+                skills: ["Electrician", "Plumber", "Carpenter"],
                 experience: "9 years",
                 phone: "+1 (555) 678-9012",
                 email: "lisa.thompson@email.com",
@@ -788,8 +815,11 @@
                         <div class="price-amount">${worker.price}</div>
                         <div class="price-unit">per hour</div>
                     </div>
-                    <div class="worker-skills">
-                        ${worker.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                    <div class="worker-specifications">
+                        ${worker.specifications.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                    </div>
+                      <div class="worker-skills">
+                        ${worker.skills.map(skills => `<span class="skills-tag">${skills}</span>`).join('')}
                     </div>
                     <button class="contact-btn" onclick="openWorkerModal(${worker.id})">View Profile & Chat</button>
               
@@ -833,9 +863,13 @@
                     <p><strong>Location:</strong> ${worker.location}</p>
                 </div>
                 
-                <div class="worker-skills">
-                    <h3>Skills & Specialties</h3>
-                    ${worker.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                <div class="worker-specifications">
+                    <h3>specifications & Specialties</h3>
+                    ${worker.specifications.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                </div>
+                  <div class="worker-skills">
+                    <h3>Extra Skills </h3>
+                    ${worker.skills.map(skill => `<span class="skills-tag">${skill}</span>`).join('')}
                 </div>
                 
                 <div class="worker-portfolio">
@@ -888,10 +922,10 @@
 
         function getWorkerWelcomeMessage(worker) {
             const welcomeMessages = {
-                electrician: `Hi! I'm ${worker.name}, your electrician with ${worker.experience} of experience. I specialize in ${worker.skills.join(', ')}. How can I help with your electrical needs today?`,
-                painter: `Hello! I'm ${worker.name}, a professional painter with ${worker.experience} of experience. I excel in ${worker.skills.join(', ')}. What painting project can I help you with?`,
-                carpenter: `Hey there! I'm ${worker.name}, a skilled carpenter with ${worker.experience} of experience. My specialties include ${worker.skills.join(', ')}. What woodworking project are you planning?`,
-                plumber: `Hi! I'm ${worker.name}, your local plumber with ${worker.experience} of experience. I handle ${worker.skills.join(', ')} and more. What plumbing issue can I solve for you?`
+                electrician: `Hi! I'm ${worker.name}, your electrician with ${worker.experience} of experience. I specialize in ${worker.specifications.join(', ')}. How can I help with your electrical needs today?`,
+                painter: `Hello! I'm ${worker.name}, a professional painter with ${worker.experience} of experience. I excel in ${worker.specifications.join(', ')}. What painting project can I help you with?`,
+                carpenter: `Hey there! I'm ${worker.name}, a skilled carpenter with ${worker.experience} of experience. My specialties include ${worker.specifications.join(', ')}. What woodworking project are you planning?`,
+                plumber: `Hi! I'm ${worker.name}, your local plumber with ${worker.experience} of experience. I handle ${worker.specifications.join(', ')} and more. What plumbing issue can I solve for you?`
             };
             
             return welcomeMessages[worker.category] || `Hello! I'm ${worker.name}. How can I assist you today?`;
@@ -982,6 +1016,11 @@
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
             renderWorkers();
+
+            function showEmergencyWorkers() {
+    const emergencyWorkers = workers.filter(worker => worker.isEmergency === true);
+    renderWorkers(emergencyWorkers);
+}
             
             // Service tabs
             document.querySelectorAll('.service-tab').forEach(tab => {
@@ -993,6 +1032,24 @@
                 });
             });
             
+
+            document.getElementById('emergency-tab').addEventListener('click', function() {
+        document.querySelectorAll('.service-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        const emergencyWorkers = workers.filter(worker => worker.isEmergency === true);
+        renderWorkers(emergencyWorkers);
+    });
+
+    document.getElementById('multi-skill-tab').addEventListener('click', function() {
+    document.querySelectorAll('.service-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+
+    // 3 किंवा त्याहून जास्त specifications असलेले labours filter करा
+    const multiSkilledWorkers = workers.filter(worker => worker.skills.length >= 1);
+    renderWorkers(multiSkilledWorkers);
+});
+
             // Filters
             document.getElementById('rating-filter').addEventListener('change', function() {
                 currentRatingFilter = this.value;
